@@ -61,3 +61,16 @@
 .letra:hover{
     cursor: pointer;
 }
+
+.palavra-jogo{
+    display: inline-block;
+    position: absolute;
+    bottom: 60px;
+    left: 500px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.letra-palavra{
+    margin-left: 5px;
+}
