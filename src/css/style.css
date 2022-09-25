@@ -2,13 +2,18 @@
     box-sizing: border-box;
 }
 
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .forca{
     width: 50vh;
 }
 
 .imagem-botao{
     margin-top: 50px;
-    margin-left: 50px;
     position: relative;
     width: 80vw;
 }
@@ -29,13 +34,8 @@
     border: none;
 }
 
-.botao-escolher:hover{
-    cursor: pointer;
-}
-
 .painel-letras{
     width: 80vw;
-    margin-left: 50px;
 }
 
 .letra{
@@ -58,7 +58,9 @@
     border: #3A749E 1px solid;
 }
 
-.letra:hover{
+.letra:hover, 
+.input button:hover,
+.botao-escolher:hover{
     cursor: pointer;
 }
 
@@ -73,4 +75,35 @@
 
 .letra-palavra{
     margin-left: 5px;
+}
+
+.input{
+    display: flex;
+    align-items: center;
+    width: 70vh;
+    margin-top: 25px;
+    justify-content: space-between;
+}
+
+.input input{
+    width: 260px;
+    height: 30px;
+}
+
+.input button{
+    height: 30px;
+    width: 70px;
+    font-weight: bold;
+    background-color: #E1ECF4;
+    color: #3A749E;
+    border: #3A749E 1px solid;
+    border-radius: 5px;
+}
+
+.ganhou{
+    color: #4AAE60;
+}
+
+.perdeu{
+    color: red;
 }
