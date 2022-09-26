@@ -16,6 +16,8 @@ function App() {
     const [numeroErros, setNumeroErros] = useState(0);
     const [imagemForca, setImagemForca] = useState(forca0);
     const [palavraChute, setPalavraChute] = useState("");
+    const [arrayConferir, setArrayConferir] = useState([]);
+    const [conferirChute, setConferirChute] = useState("");
 
     function imprimirLetras(a, index) {
         if (jogoHabilitado) {
@@ -32,8 +34,65 @@ function App() {
 
     function selecionarLetra(a) {
         if (jogoHabilitado) {
-            setLetraEscolhida([...letraEscolhida, a]);
-            if (!palavraEscolhida.includes(a)) {
+            const novasLetras = [...letraEscolhida, a]
+            setLetraEscolhida(novasLetras)
+            let novoArray = arrayConferir;
+            if (novasLetras.includes('a') || novasLetras.includes('e') || novasLetras.includes('i') || novasLetras.includes('o') || novasLetras.includes('u') || novasLetras.includes('c')) {
+                if (arrayConferir.includes('á')) {
+                    novoArray = novoArray.filter((l) => l !== 'á');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('ã')) {
+                    novoArray = novoArray.filter((l) => l !== 'ã');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('à')) {
+                    novoArray = novoArray.filter((l) => l !== 'à');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                }else if (arrayConferir.includes('â')) {
+                    novoArray = novoArray.filter((l) => l !== 'â');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                }  else if (arrayConferir.includes('é')) {
+                    novoArray = novoArray.filter((l) => l !== 'é');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('ê')) {
+                    novoArray = novoArray.filter((l) => l !== 'ê');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('í')) {
+                    novoArray = novoArray.filter((l) => l !== 'í');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('ó')) {
+                    novoArray = novoArray.filter((l) => l !== 'ó');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('ô')) {
+                    novoArray = novoArray.filter((l) => l !== 'ô');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                }else if (arrayConferir.includes('ç')) {
+                    novoArray = novoArray.filter((l) => l !== 'ç');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                } else if (arrayConferir.includes('ú')) {
+                    novoArray = novoArray.filter((l) => l !== 'ú');
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                }else {
+                    novoArray = novoArray.filter((l) => l !== a);
+                    setArrayConferir(novoArray);
+                }
+            } else {
+                novoArray = novoArray.filter((l) => l !== a);
+                setArrayConferir(novoArray);
+            }
+
+
+            if (novoArray.length === arrayConferir.length) {
                 const adicionaErro = numeroErros + 1
                 if (adicionaErro <= 6) {
                     setNumeroErros(numeroErros + 1);
@@ -41,8 +100,12 @@ function App() {
                 } else {
                     setJogoHabilitado(false);
                 }
-
             }
+
+
+
+
+
         } else {
             alert("o jogo ainda não iniciou")
         }
@@ -84,31 +147,42 @@ function App() {
         for (let i = 0; i < palavraSelecionada.length; i++) {
             arrayPalavra.push(palavraSelecionada[i]);
         }
-        setPalavraEscolhida([...arrayPalavra])
+        setPalavraEscolhida([...arrayPalavra]);
+        setArrayConferir([...arrayPalavra]);
     }
 
+
     function imprimirPalavra() {
-        if (letraEscolhida.toString() === palavraEscolhida.toString()) {
+        console.log(arrayConferir);
+        if(conferirChute===false){
+            return (
+                palavraEscolhida.map((a) => (<span className="letra-palavra perdeu">{a}</span>))
+            )
+        } else if (arrayConferir.length === 0 || conferirChute === true) {
             return (
                 palavraEscolhida.map((a) => (<span className="letra-palavra ganhou">{a}</span>))
             )
         } else if (numeroErros < 6) {
             return (
-                palavraEscolhida.map((a) => (letraEscolhida.includes(a)) ? <span className="letra-palavra">{a}</span> : <span className="letra-palavra">_</span>)
+                palavraEscolhida.map((a) => (arrayConferir.includes(a)) ? <span className="letra-palavra">_</span> : <span className="letra-palavra">{a}</span>)
             )
-        } else {
-            return (
-                palavraEscolhida.map((a) => (<span className="letra-palavra perdeu">{a}</span>))
-            )
-        }
+        } 
 
     }
 
-    function chutarPalavra(){
-    
-       if(palavraChute.localeCompare(palavraEscolhida.toString() === 0)){
-        alert("Você acertouuuu");
-       }
+    function chutarPalavra() {
+        
+        const palavraString = palavraEscolhida.join("");
+        console.log(palavraChute);
+        console.log(palavraString)
+
+        if (palavraChute.localeCompare(palavraString)===0) {
+            setConferirChute(true)
+            setJogoHabilitado(false)
+        } else {
+            setConferirChute(false)
+            setJogoHabilitado(false)
+        }
 
     }
 
@@ -116,7 +190,6 @@ function App() {
 
     return (
         <section>
-            <p>{palavraEscolhida}</p>
             <div className="imagem-botao">
                 <img className="forca" src={imagemForca} alt="imagem da forca" />
                 <button className="botao-escolher" onClick={habilitarJogo}>Escolher Palavra</button>
@@ -130,7 +203,7 @@ function App() {
 
             <div className="input">
                 <p>Já sei a palavra!</p>
-                <input onChange={e => setPalavraChute(e.target.value)} value={palavraChute}/>
+                <input onChange={e => setPalavraChute(e.target.value)} value={palavraChute} />
                 <button onClick={chutarPalavra}>Chutar</button>
             </div>
 
